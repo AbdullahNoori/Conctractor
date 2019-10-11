@@ -15,5 +15,12 @@ sample_form_data = {
     'price': sample_sneaker['price']
 }
 
+class PlaylistsTests(TestCase):
+    def setUp(self):
+        # test setup
+        self.client = app.test_client()
+        app.config['TESTING'] = True
+
+
 if __name__ == '__main__':
     unittest_main()
