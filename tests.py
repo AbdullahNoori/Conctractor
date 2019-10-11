@@ -51,6 +51,12 @@ class PlaylistsTests(TestCase):
         self.assertEqual(result.status, '200 OK')
         self.assertIn(b'sneakers', result.data)
 
+    @mock.patch('pymongo.collection.Collection.delete_one')
+    def test_delete_sneaker(self, mock_delete):
+        form_data = {'_method': 'DELETE'}
+        result = self.client.post(f'/sneaker/{sample_sneaker_id}/delete', data=form_data)
+        self.assertEqual(result.status, '302 FOUND')
+        mock_delete.assert_called_with({'_id': sample_sneaker_id})
 
 if __name__ == '__main__':
     unittest_main()
