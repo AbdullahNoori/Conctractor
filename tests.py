@@ -27,6 +27,20 @@ class PlaylistsTests(TestCase):
         self.assertEqual(result.status, '200 OK')
         self.assertIn(b'sneaker', result.data)
 
+    def test_new(self):
+        """Test the new sneaker creation page."""
+        result = self.client.get('/sneakers/new')
+        self.assertEqual(result.status, '200 OK')
+        self.assertIn(b'New Sneaker', result.data)
+    
+    @mock.patch('pymongo.collection.Collection.find_one')
+    def test_show_sneaker(self, mock_find):
+        """Test showing a single playlist."""
+        mock_find.return_value = sample_sneaker
+
+        result = self.client.get(f'/sneakers/{sample_sneaker_id}')
+        self.assertEqual(result.status, '200 OK')
+      
 
 if __name__ == '__main__':
     unittest_main()
