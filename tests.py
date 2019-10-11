@@ -40,7 +40,17 @@ class PlaylistsTests(TestCase):
 
         result = self.client.get(f'/sneakers/{sample_sneaker_id}')
         self.assertEqual(result.status, '200 OK')
-      
+        self.assertIn(b'sneakers', result.data)
+
+    @mock.patch('pymongo.collection.Collection.find_one')
+    def test_edit_sneaker(self, mock_find):
+        """Test editing a single sneaker"""
+        mock_find.return_value = sample_sneaker
+
+        result = self.client.get(f'/sneakers/{sample_sneaker_id}/edit')
+        self.assertEqual(result.status, '200 OK')
+        self.assertIn(b'sneakers', result.data)
+
 
 if __name__ == '__main__':
     unittest_main()
