@@ -1,0 +1,12 @@
+<!-- <h1>Create</h1> -->
+{% extends "base.html" %}
+
+
+{% block content %}
+<h1>Sneakers for sale</h1>
+<a href="/sneakers/new">New sneaker</a>
+    {% for sneaker in sneakers %}
+        <h2>{{ sneaker.title }}</h2>
+        <small>{{ sneaker.description }}</small>
+    {% endfor %}
+{% endblock %}

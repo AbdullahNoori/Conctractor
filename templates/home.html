@@ -1,0 +1,27 @@
+<!-- <h1>Create</h1> -->
+{% extends "base.html" %}
+
+{% block navbarRightBtn %}
+    <a href='/sneakers/new' class='add-btn'><button>New Sneaker</button></a>
+{% endblock navbarRightBtn %}
+
+{% block content %}
+
+<link rel="stylesheet" href="/static/home.css">
+<br>
+<div class="flex-container">
+{% for sneaker in sneakers %}
+    
+    <div>
+            <a  style="text-decoration: none;" href="/sneakers/{{ sneaker._id }}">
+        <img style="width: 200px; height: 200px; margin-top: 30px;" class="card-img-top" src="{{ sneaker.image }}" alt="Card image cap">
+     <div>
+        <p class="des">{{ sneaker.title }}</p>
+        <p class="des">{{ sneaker.price }}</p>
+     </div>
+    </a>
+    </div>
+
+{% endfor %}
+</div>
+{% endblock %}
